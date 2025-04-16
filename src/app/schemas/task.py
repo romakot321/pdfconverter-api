@@ -34,5 +34,6 @@ class TaskShortSchema(BaseModel):
 
 class TaskCreateSchema(BaseModel):
     convert_to: TaskFileConvertTo
+    password: str | None = None
     app_bundle: str
     user_id: str
