@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from fastapi import APIRouter, BackgroundTasks, Depends, File, UploadFile
+from fastapi import APIRouter, BackgroundTasks, Depends, File, UploadFile, HTTPException
 from fastapi.responses import Response
 
 from app.schemas.task import TaskCreateSchema, TaskSchema, TaskShortSchema
@@ -31,4 +31,6 @@ async def get_task(task_id: UUID, service: TaskService = Depends()):
 @router.get("/{task_id}/file", response_class=Response)
 def get_task_file(task_id: UUID, service: TaskService = Depends()):
     body = service.get_file(str(task_id))
+    if body is None:
+        raise HTTPException(404)
     return Response(content=body, media_type="application/octet-stream")
