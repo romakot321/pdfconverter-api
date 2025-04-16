@@ -1,32 +1,19 @@
+from io import BytesIO
 import os
 from aiohttp import ClientSession
-from pydantic import ValidationError
 
-from app.schemas.external import ExternalTaskSchema
+from app.schemas.exception import APIException
 
 
 class ExternalRepository:
-    EXTERNAL_API_URL = ""
+    EXTERNAL_API_URL = "http://pdfconverterapi_converter"
     EXTERNAL_API_TOKEN = os.getenv("EXTERNAL_API_TOKEN")
 
-    async def create_task(self, data: ExternalTaskSchema) -> str:
+    async def convert(self, file: bytes, convert_to: str) -> bytes:
         async with ClientSession(
             base_url=self.EXTERNAL_API_URL,
-            headers={"Authorization": "Bearer " + self.EXTERNAL_API_TOKEN},
         ) as session:
-            resp = await session.post("/api/task", json=data.model_dump())
-            assert resp.status in (201, 200), await resp.text()
-            return (await resp.json())["id"]
-
-    async def get_task(self, task_id: str) -> ExternalTaskSchema | None:
-        async with ClientSession(
-            base_url=self.EXTERNAL_API_URL,
-            headers={"Authorization": "Bearer " + self.EXTERNAL_API_TOKEN},
-        ) as session:
-            resp = await session.get("/api/task/" + task_id)
-            assert resp.status == 200, await resp.text()
-            body = await resp.json()
-        try:
-            return ExternalTaskSchema.model_validate(body)
-        except ValidationError:
-            return None
+            resp = await session.post("/convert?convert_to=" + convert_to, data={"file": BytesIO(file)})
+            if resp.status != 200:
+                raise APIException(await resp.text())
+            return await resp.read()

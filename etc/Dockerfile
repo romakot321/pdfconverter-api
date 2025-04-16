@@ -74,7 +74,7 @@ ENV PATH=/app/bin:$PATH \
   PYTHONFAULTHANDLER=1 \
   PYTHONUNBUFFERED=1
 
-COPY docker-entrypoint.sh /
+COPY etc/docker-entrypoint.sh /
 
 COPY --link --chown=$user_id:$group_id --from=build /app/ /app
 COPY --link ./templates /app/templates

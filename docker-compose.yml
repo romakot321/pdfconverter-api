@@ -4,9 +4,11 @@ services:
   app:
     build:
       context: ./
-    container_name: template_app
+      dockerfile: ./etc/Dockerfile
+    container_name: pdfconverterapi_app
     depends_on:
       - postgres
+      - converter
     env_file:
       - .env
     restart: always
@@ -14,9 +16,18 @@ services:
       global_network:
       default:
 
+  converter:
+    build:
+      context: ./
+      dockerfile: ./etc/converter.Dockerfile
+    container_name: pdfconverterapi_converter
+    restart: always
+    networks:
+      default:
+
   postgres:
     image: postgres:latest
-    container_name: template_db
+    container_name: pdfconverterapi_db
     restart: always
     env_file:
       - .env

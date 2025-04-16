@@ -1,16 +1,25 @@
+from enum import Enum
 from uuid import UUID
 from pydantic import BaseModel, ConfigDict
 
 from app.schemas import BaseSearchSchema
 
 
+class TaskFileConvertTo(Enum):
+    pdf = 'pdf'
+    docx = 'docx'
+    doc = 'doc'
+
+
 class TaskSchema(BaseModel):
     class TaskItem(BaseModel):
         id: int
+        filename: str
 
         model_config = ConfigDict(from_attributes=True)
 
     id: UUID
+    error: str | None = None
     items: list[TaskItem]
 
     model_config = ConfigDict(from_attributes=True)
@@ -18,17 +27,12 @@ class TaskSchema(BaseModel):
 
 class TaskShortSchema(BaseModel):
     id: UUID
+    error: str | None = None
 
     model_config = ConfigDict(from_attributes=True)
 
 
-class TaskUpdateSchema(BaseModel):
-    pass
-
-
-class TaskSearchSchema(BaseSearchSchema):
-    pass
-
-
 class TaskCreateSchema(BaseModel):
-    text: str
+    convert_to: TaskFileConvertTo
+    app_bundle: str
+    user_id: str

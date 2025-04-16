@@ -45,6 +45,7 @@ class TaskItem(Base):
     __tablename__ = "task_items"
 
     id: M[int] = column(primary_key=True, index=True, autoincrement=True)
+    filename: M[str]
     task_id: M[UUID] = column(ForeignKey("tasks.id", ondelete="CASCADE"))
 
     task: M["Task"] = relationship(back_populates="items")
@@ -52,5 +53,7 @@ class TaskItem(Base):
 
 class Task(BaseMixin, Base):
     error: M[str | None] = column(nullable=True)
+    app_bundle: M[str]
+    user_id: M[str]
 
     items: M[list["TaskItem"]] = relationship(back_populates="task", lazy="selectin")

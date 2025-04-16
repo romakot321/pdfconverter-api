@@ -135,6 +135,7 @@ dependencies = [
     { name = "sqlalchemy" },
     { name = "sqlalchemy-service" },
     { name = "typing-inspect" },
+    { name = "uno" },
     { name = "uvicorn" },
 ]
 
@@ -142,7 +143,6 @@ dependencies = [
 dev = [
     { name = "grpcio-tools" },
     { name = "pynvim" },
-    { name = "pytest" },
 ]
 
 [package.metadata]
@@ -159,6 +159,7 @@ requires-dist = [
     { name = "sqlalchemy", specifier = "==2.0.*" },
     { name = "sqlalchemy-service", specifier = "==1.0.9" },
     { name = "typing-inspect", specifier = ">=0.9.0" },
+    { name = "uno", specifier = ">=0.3.3" },
     { name = "uvicorn", specifier = "==0.34.*" },
 ]
 
@@ -166,7 +167,6 @@ requires-dist = [
 dev = [
     { name = "grpcio-tools", specifier = "==1.66.*" },
     { name = "pynvim" },
-    { name = "pytest", specifier = "==8.3.*" },
 ]
 
 [[package]]
@@ -371,15 +371,6 @@ wheels = [
 ]
 
 [[package]]
-name = "iniconfig"
-version = "2.1.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/f2/97/ebf4da567aa6827c909642694d71c9fcf53e5b504f2d96afea02718862f3/iniconfig-2.1.0.tar.gz", hash = "sha256:3abbd2e30b36733fee78f9c7f7308f2d0050e88f0087fd25c2645f63c773e1c7", size = 4793 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/2c/e1/e6716421ea10d38022b952c159d5161ca1193197fb744506875fbb87ea7b/iniconfig-2.1.0-py3-none-any.whl", hash = "sha256:9deba5723312380e77435581c6bf4935c94cbfab9b1ed33ef8d238ea168eb760", size = 6050 },
-]
-
-[[package]]
 name = "itsdangerous"
 version = "2.2.0"
 source = { registry = "https://pypi.org/simple" }
@@ -539,15 +530,6 @@ wheels = [
 ]
 
 [[package]]
-name = "pluggy"
-version = "1.5.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/96/2d/02d4312c973c6050a18b314a5ad0b3210edb65a906f868e31c111dede4a6/pluggy-1.5.0.tar.gz", hash = "sha256:2cffa88e94fdc978c4c574f15f9e59b7f4201d439195c3715ca9e2486f1d0cf1", size = 67955 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/88/5f/e351af9a41f866ac3f1fac4ca0613908d9a41741cfcf2228f4ad853b697d/pluggy-1.5.0-py3-none-any.whl", hash = "sha256:44e1ad92c8ca002de6377e165f3e0f1be63266ab4d554740532335b9d75ea669", size = 20556 },
-]
-
-[[package]]
 name = "propcache"
 version = "0.3.1"
 source = { registry = "https://pypi.org/simple" }
@@ -617,6 +599,12 @@ wheels = [
 ]
 
 [[package]]
+name = "py"
+version = "1.4.22"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/46/a7/a8e030ef1163f0e28c49a098422e0d5307c4925b3a3e44df0a06f602258d/py-1.4.22.tar.gz", hash = "sha256:1ef0c4eb8f12f970dd831f32755f95a36af66a8ca9c35991100146428fd42474", size = 189283 }
+
+[[package]]
 name = "pydantic"
 version = "2.10.6"
 source = { registry = "https://pypi.org/simple" }
@@ -683,18 +671,12 @@ wheels = [
 
 [[package]]
 name = "pytest"
-version = "8.3.5"
+version = "2.6.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32'" },
-    { name = "iniconfig" },
-    { name = "packaging" },
-    { name = "pluggy" },
+    { name = "py" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ae/3c/c9d525a414d506893f0cd8a8d0de7706446213181570cdbd766691164e40/pytest-8.3.5.tar.gz", hash = "sha256:f4efe70cc14e511565ac476b57c279e12a855b11f48f212af1080ef2263d3845", size = 1450891 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/30/3d/64ad57c803f1fa1e963a7946b6e0fea4a70df53c1a7fed304586539c2bac/pytest-8.3.5-py3-none-any.whl", hash = "sha256:c69214aa47deac29fad6c2a4f590b9c4a9fdb16a403176fe154b79c0b4d4d820", size = 343634 },
-]
+sdist = { url = "https://files.pythonhosted.org/packages/a5/4c/82253e6fa5bdfb16fa560d1569c9e28b797fafc0a41602725743f5cdb922/pytest-2.6.0.tar.gz", hash = "sha256:1e4f7c23d5444c01316bd84edd629af3170331fade12bcc263f0a2a716bbaed1", size = 625374 }
 
 [[package]]
 name = "python-dotenv"
@@ -816,6 +798,16 @@ sdist = { url = "https://files.pythonhosted.org/packages/dc/74/1789779d91f1961fa
 wheels = [
     { url = "https://files.pythonhosted.org/packages/65/f3/107a22063bf27bdccf2024833d3445f4eea42b2e598abfbd46f6a63b6cb0/typing_inspect-0.9.0-py3-none-any.whl", hash = "sha256:9ee6fc59062311ef8547596ab6b955e1b8aa46242d854bfc78f4f6b0eff35f9f", size = 8827 },
 ]
+
+[[package]]
+name = "uno"
+version = "0.3.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "py" },
+    { name = "pytest" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/54/67/10513a0b50fb6974f0b8f53c171e161a281d2f28b951aeadbb722871b9a6/uno-0.3.3.tar.gz", hash = "sha256:2037b35b5f038c8156c273b963d1c4afd536f72939b1bb86a17460d4251935c4", size = 7558 }
 
 [[package]]
 name = "uvicorn"

@@ -21,6 +21,8 @@ def upgrade() -> None:
     op.create_table('tasks',
     sa.Column('error', sa.String(), nullable=True),
     sa.Column('id', sa.Uuid(), server_default=sa.text('gen_random_uuid()'), nullable=False),
+    sa.Column('app_bundle', sa.String(), nullable=False),
+    sa.Column('user_id', sa.String(), nullable=False),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text("(now() at time zone 'utc')"), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id')
@@ -29,6 +31,7 @@ def upgrade() -> None:
     op.create_table('task_items',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('task_id', sa.Uuid(), nullable=False),
+    sa.Column('filename', sa.String(), nullable=False),
     sa.ForeignKeyConstraint(['task_id'], ['tasks.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
